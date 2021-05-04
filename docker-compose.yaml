@@ -21,23 +21,25 @@ services:
             - MYSQL_DBNAME=desafio_docker
             - API_PORT=3000
             - MYSQL_USER=root
-        depends_on:
-            - mysql
         networks:
             - backend
             - frontend
+        depends_on:
+            - mysql
 
     nginx:
         container_name: pfa-nginx
         build: ./nginx-compose
         ports:
             - 8000:80
-        depends_on:
-            - go
         networks:
             - frontend
+        depends_on:
+            - go
 
 networks:
     backend:
+        driver: bridge
     frontend:
+        driver: bridge
 
