@@ -21,21 +21,22 @@ services:
             - MYSQL_DBNAME=desafio_docker
             - API_PORT=3000
             - MYSQL_USER=root
+        depends_on:
+            - mysql
+        command: sh -c "dockerize -wait tcp://mysql:3306 -timeout 300s -wait-retry-interval 5s /app"
         networks:
             - backend
             - frontend
-        depends_on:
-            - mysql
 
     nginx:
         container_name: pfa-nginx
         build: ./nginx-compose
         ports:
             - 8000:80
-        networks:
-            - frontend
         depends_on:
             - go
+        networks:
+            - frontend
 
 networks:
     backend:
