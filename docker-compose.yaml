@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+    mysql:
+        container_name: pfa-mysql
+        image: mysql:8.0
+        volumes:
+            - ./dbdata:/var/lib/mysql
+            - ./mysql:/docker-entrypoint-initdb.d
+        environment:
+            - MYSQL_PASSWORD=""
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+        networks:
+            - backend
+
+    go:
+        container_name: pfa_go
+        image: roodrigolr/desafio-docker1-pfa
+        environment:
+            - MYSQL_URL=mysql
+            - MYSQL_DBNAME=desafio_docker
+            - API_PORT=3000
+            - MYSQL_USER=root
+        depends_on:
+            - mysql
+        networks:
+            - backend
+            - frontend
+
+    nginx:
+        container_name: pfa-nginx
+        build: ./nginx-compose
+        ports:
+            - 8000:80
+        depends_on:
+            - go
+        networks:
+            - frontend
+
+networks:
+    backend:
+    frontend:
+

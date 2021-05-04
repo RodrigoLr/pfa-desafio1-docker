@@ -32,3 +32,13 @@ Com todos os comandos rodando corretamente, será posível acessar o endereço `
 #### Link para a listagem de módulos
 
 `http://localhost:8080/v1/module`
+
+## Utilizando a api com docker-compose
+
+`docker-compose up`
+
+Será posível acessar o endereço `http://localhost:8000/` da sua máquina.
+
+#### Link para a listagem de módulos
+
+`http://localhost:8000/v1/module`
