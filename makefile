@@ -8,7 +8,7 @@ API_IMAGE=roodrigolr/desafio-docker1-pfa
 API_PORT=3000
 NGINX_CONTAINER_NAME=nginx-desafio
 NGINX_IMAGE=roodrigolr/nginx-desafio
-NETWORK=network-pfa
+NETWORK=network-desafio
 
 create-network:
 	docker network create $(NETWORK)
